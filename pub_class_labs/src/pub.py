@@ -14,3 +14,8 @@ class Pub:
         for drink in self.drinks:
             if drink.name == name_drink:
                 return drink.price
+            
+    def purchase(self, drink_name, customer):
+    
+        customer.wallet -= self.check_price(drink_name)
+        self.increase_till(self.check_price(drink_name))
