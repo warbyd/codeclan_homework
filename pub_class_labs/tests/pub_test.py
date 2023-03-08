@@ -17,4 +17,8 @@ class TestPub(unittest.TestCase):
         price = self.pub.check_price("Beer")
         self.assertEqual(4.00, price)
 
+    def test_drink_list(self):
+        drinks_list_number = len(self.pub.drinks)
+        self.assertEqual(3, drinks_list_number)
+
     
