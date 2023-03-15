@@ -9,7 +9,7 @@
 <body>
     <h1>Orders List</h1>
     {% for order  in order_list  %}
-       <p>{{ order.customer_name }}, {{ order.order_date }}, {{ order.quantity }}, <i>{{ order.book_title }}</i></p>
+       <p>{{ order.customer_name }}, {{ order.order_date }}, {{ order.quantity }}, <i>{{ order.book_title }}</i>, <a href= "http://localhost:4999/orders/{{ order.id }}">Order Link</a> </a></p>
     {% endfor %}
     
 </body>
