@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ book.title }}</h2>
+  <p><strong>Author:</strong> {{ book.author }}</p>
+  <p><strong>Synopsis:</strong> {{ book.synopsis }}</p>
+  <p><strong>Genre:</strong> {{ book.genre }}</p>
+  {% if book.checked_out %}
+    <p><strong>Status:</strong> Checked out</p>
+  {% else %}
+    <p><strong>Status:</strong> Available</p>
+  {% endif %}
+
+  <form method="POST" action="/books/{{ book.id }}/update">
+    <input type="hidden" name="_method" value="POST">
+    {% if book.checked_out %}
+      <button type="submit" class="btn btn-primary">Check in</button>
+    {% else %}
+      <button type="submit" class="btn btn-primary">Check out</button>
+    {% endif %}
+  </form>
+{% endblock %}
