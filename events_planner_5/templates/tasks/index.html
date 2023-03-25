@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Tasks{% endblock %}
+
+{% block content %}
+  <h1>Tasks</h1>
+  <a href="/tasks/new">Add new task</a>
+  <ul>
+    {% for task in tasks %}
+      <div class="task-box event-box">
+        <li>
+          <strong>{{ task.description }}</strong>
+          <br>
+          <em>Status:</em> 
+          {% if task.completed %}
+            Completed
+          {% else %}
+            Incomplete
+          {% endif %}
+          <br>
+          <em>Associated event:</em> {{ task.event_id.title }}
+          <br><br>
+          <form method="post" action="{{ url_for('tasks.update_task', id=task.id) }}">
+
+            <input type="hidden" name="_method" value="PUT">
+            <button type="submit" name="completed" value="{{ not task.completed }}">Mark as {{ 'Incomplete' if task.completed else 'Complete' }}</button>
+          </form>
+        </li>
+      </div>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
+
+
