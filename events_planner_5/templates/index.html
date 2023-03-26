@@ -14,7 +14,7 @@
         <p><strong>Description:</strong> {{ event.description }}</p>
         <h4>Tasks:</h4>
         <ul>
-          {% for task in tasks %}
+          {% for task in tasks_for_events[event.id] %}
             <li>{{ task.description }}</li>
           {% endfor %}
         </ul>
@@ -22,6 +22,7 @@
     {% endfor %}
   </div>
 {% endblock %}
+
 
 
 

@@ -8,15 +8,12 @@
     <label for="event">Event:</label>
     <select id="event" name="event">
       {% for event in events %}
-      <option value="{{ event_id }}">{{ event.title }}</option>
+    <option value="{{ event.id }}">{{ event.title }}</option>
       {% endfor %}
     </select>
     <br>
     <label for="description">Description:</label>
     <textarea id="description" name="description"></textarea>
-    <br>
-    <label for="completed">Completed:</label>
-    <input type="checkbox" id="completed" name="completed" value="True">
     <br>
     <button type="submit">Create</button>
   </form>

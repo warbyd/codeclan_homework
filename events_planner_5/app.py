@@ -14,8 +14,14 @@ app.register_blueprint(users_blueprint)
 @app.route('/')
 def home():
     upcoming_events = event_repository.get_upcoming_events(3)
-    tasks = tasks_repository.get_all_tasks()
-    return render_template('index.html', events=upcoming_events, tasks=tasks)
+    tasks_for_events = {}
+    for event in upcoming_events:
+        tasks_for_event = tasks_repository.get_tasks_for_event(event.id)
+        tasks_for_events[event.id] = tasks_for_event
+    return render_template('index.html', events=upcoming_events, tasks_for_events=tasks_for_events)
+
+
+
 
 
 if __name__ == '__main__':

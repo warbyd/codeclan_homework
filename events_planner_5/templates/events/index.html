@@ -14,15 +14,18 @@
         <div class="event-info"><em>Location:</em> {{ event.location }}</div>
         <div class="event-info"><em>Description:</em> {{ event.description }}</div>
         <div class="event-info"><em>Host:</em> {{ event.user_id.name }} ({{ event.user_id.email }})</div>
+        <h2>Tasks:</h2>
         <ul>
-          {% for task in event.tasks %}
-            <li>{{ task.title }}</li>
+          {% for task in tasks_for_events[event.id] %}
+            <li>{{ task.title }} - {{ task.description }}</li>
           {% endfor %}
         </ul>
       </li>
     {% endfor %}
   </ul>
 {% endblock %}
+
+
 
 
 

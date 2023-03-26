@@ -1,9 +1,9 @@
 # events_controller.py
 
-
 from flask import Flask, render_template, request, redirect, Blueprint
 from models.event import Event
 import repositories.event_repository as event_repository
+import repositories.tasks_repository as task_repository
 
 events_blueprint = Blueprint("events", __name__)
 
@@ -12,7 +12,11 @@ events_blueprint = Blueprint("events", __name__)
 @events_blueprint.route("/events")
 def events():
     events = event_repository.select_all()
-    return render_template("events/index.html", events=events)
+    tasks_for_events = {}
+    for event in events:
+        tasks_for_events[event.id] = task_repository.get_tasks_for_event(event.id)
+    return render_template("events/index.html", events=events, tasks_for_events=tasks_for_events)
+
 
 # NEW
 # GET '/events/new'
@@ -41,6 +45,14 @@ def create_event():
 def delete_event(id):
     event_repository.delete(id)
     return redirect('/events')
+
+# GET '/events/<int:event_id>'
+@events_blueprint.route('/events/<int:event_id>')
+def event(event_id):
+    event = event_repository.select(event_id)
+    tasks = task_repository.get_tasks_for_event(event_id)
+    return render_template('events/event.html', event=event, tasks=tasks)
+
 
 
 
