@@ -3,8 +3,8 @@
 {% block title %}New Task{% endblock %}
 
 {% block content %}
-  <h1>New Task</h1>
-  <form action="/tasks" method="POST">
+  <h1 class="event-box2"> New Task</h1>
+  <form action="/tasks" method="POST" class="newevent-form">
     <label for="event">Event:</label>
     <select id="event" name="event">
       {% for event in events %}
@@ -15,7 +15,7 @@
     <label for="description">Description:</label>
     <textarea id="description" name="description"></textarea>
     <br>
-    <button type="submit">Create</button>
+    <button type="submit" class="button">Create</button>
   </form>
 {% endblock %}
 

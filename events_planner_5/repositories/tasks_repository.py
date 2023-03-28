@@ -110,6 +110,13 @@ def get_tasks_sorted_by_status(status):
     
     return tasks
 
-    
+def remove_completed_tasks_from_event(event_id):
+    sql = "DELETE FROM tasks WHERE event_id = %s AND completed = true"
+    values = [event_id]
+    run_sql(sql, values)
+
+
+
+
 
      

@@ -66,4 +66,3 @@ def get_upcoming_events(n):
 
 
 
-

@@ -48,15 +48,45 @@ def delete_task(id):
     return redirect('/tasks')
 
 
+# @tasks_blueprint.route("/tasks/<id>/update", methods=['POST'])
+# def update_task(id):
+#     task = task_repository.select(id)
+#     print(task.__dict__)
+#     if task:
+#         completed = request.form.get('completed') == 'True'
+#         task.description = request.form.get('description')
+#         task.completed = completed
+#         task_repository.update(task)
+#     return redirect('/tasks')
+
+# @tasks_blueprint.route("/tasks/<id>/update", methods=['POST'])
+# def update_task(id):
+#     task = task_repository.select(id)
+#     print(task.__dict__)
+#     if task:
+#         completed = request.form.get('completed') == 'True'
+#         task.completed = completed
+#         task_repository.update(task)
+#     return redirect('/tasks')
+
 @tasks_blueprint.route("/tasks/<id>/update", methods=['POST'])
 def update_task(id):
     task = task_repository.select(id)
-    print(task.__dict__)
     if task:
-        completed = request.form.get('completed') == 'True'
-        task.completed = completed
-        task_repository.update(task)
-    return redirect('/tasks')
+        if 'description' in request.form:
+            # Update task description
+            completed = request.form.get('completed') == 'True'
+            task.description = request.form.get('description')
+            task.completed = completed
+            task_repository.update(task)
+            return redirect('/tasks')
+        else:
+            # Update task status
+            task.completed = not task.completed
+            task_repository.update(task)
+            return redirect('/tasks')
+    else:
+        return redirect('/tasks')
 
 
 
@@ -74,16 +104,23 @@ def sort_tasks_by_status(status):
 
 @tasks_blueprint.route("/tasks/sort", methods=['POST'])
 def sort_tasks():
-    print(request.form.get("sort_by"))
+
     sort_by = request.form.get("sort_by")
     if sort_by == "event_date":
         return sort_tasks_by_due_date()
     elif sort_by == "status_incomplete":
-        print("hello")
         return sort_tasks_by_status("incomplete")
     elif sort_by == "status_complete":
         return sort_tasks_by_status("complete")
     
+@tasks_blueprint.route("/tasks/<id>/edit")
+def edit_task(id):
+    task = task_repository.select(id)
+    events = event_repository.select_all()  # fetch all events
+    return render_template("tasks/edit.html", task=task, events=events)
+
+
+
 
 
       
