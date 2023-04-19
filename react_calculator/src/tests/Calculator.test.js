@@ -100,19 +100,32 @@ describe('Calculator', () => {
     const addButton = container.getByTestId('operator-add');
     const button3 = container.getByTestId('number3');
     const clearButton = container.getByTestId('clear');
+    const equalsButton = container.getByTestId('operator-equals');
     const runningTotal = container.getByTestId('running-total');
+  
+    // Click 2, +, 3, then clear
     fireEvent.click(button2);
     fireEvent.click(addButton);
     fireEvent.click(button3);
     fireEvent.click(clearButton);
-    expect(runningTotal.textContent).toEqual('0');
+  
+    // Click 4, +, 5, then equals
+    fireEvent.click(container.getByTestId('number4'));
+    fireEvent.click(addButton);
+    fireEvent.click(container.getByTestId('number5'));
+    fireEvent.click(equalsButton);
+  
+    // Check that the running total is correct
+    expect(runningTotal.textContent).toEqual('9');
+  });
+  
   });
 
 
   
 
 
-});
+
 
 
 

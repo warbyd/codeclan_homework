@@ -71,7 +71,7 @@ describe("Calculator", () => {
     cy.get('#number0').click();
     cy.get('#operator-equals').click();
   
-    // Verify that the result shows as '0' in the display
+    // Verify that the result shows as 'Error' in the display
     cy.get('.display').invoke('text').should('equal', '0');
   });
   
