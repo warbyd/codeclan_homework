@@ -69,7 +69,7 @@ describe('Calculator', () => {
     expect(runningTotal.textContent).toEqual('3');
   });
 
-  it('should concatenate multiple number button clicks', () => {
+  it('should conc multiple number button clicks', () => {
     const button2 = container.getByTestId('number2');
     const button3 = container.getByTestId('number3');
     const runningTotal = container.getByTestId('running-total');
@@ -107,7 +107,8 @@ describe('Calculator', () => {
     fireEvent.click(clearButton);
     expect(runningTotal.textContent).toEqual('0');
   });
-  
+
+
   
 
 

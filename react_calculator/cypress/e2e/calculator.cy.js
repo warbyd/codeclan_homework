@@ -18,19 +18,13 @@ describe("Calculator", () => {
   
 
   it('should allow chaining of multiple operations', () => {
-    // Click number 3
+
     cy.get('#number3').click();
-    // Click the addition operator
     cy.get('#operator-multiply').click();
-    // Click number 1
     cy.get('#number1').click();
-    // Click the subtraction operator
     cy.get('#operator-subtract').click();
-    // Click number 2
     cy.get('#number2').click();
-    // Click the equals operator
     cy.get('#operator-equals').click();
-    // Verify the display shows 2 as the result (3 + 1 - 2 = 2)
     cy.get('.display').should('contain', '1');
   });
 
@@ -69,6 +63,23 @@ describe("Calculator", () => {
     cy.get('#operator-equals').click();
     cy.get('.display').should('contain', '99000')
   })
+
+  it('should handle division by zero', () => {
+    // Perform division by zero operation
+    cy.get('#number5').click();
+    cy.get('#operator-divide').click();
+    cy.get('#number0').click();
+    cy.get('#operator-equals').click();
+  
+    // Verify that the result shows as '0' in the display
+    cy.get('.display').invoke('text').should('equal', '0');
+  });
+  
+  
+  
+  
+  
+  
 
 
 
