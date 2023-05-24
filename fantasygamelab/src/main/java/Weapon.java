@@ -1,3 +1,3 @@
 public interface Weapon {
-    public int use();
+    int use();
 }

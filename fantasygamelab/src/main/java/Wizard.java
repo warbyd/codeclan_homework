@@ -14,17 +14,11 @@ public class Wizard extends Player {
         target.defend(damage);
     }
 
+    @Override
     public void defend(int damage) {
-        if (creature != null) {
-            creature.defend(damage);
-        } else {
-            int newHealth = this.getHealthPoints() - damage;
-            this.setHealthPoints(newHealth > 0 ? newHealth : 0);
-        }
+        int defendedDamage = creature != null ? creature.defend(damage) : damage;
+        setHealthPoints(Math.max(0, getHealthPoints() - defendedDamage));
     }
-
-
-
 
 
     public void changeSpell(Spell newSpell) {

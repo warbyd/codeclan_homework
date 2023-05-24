@@ -2,26 +2,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-    private int enemyCount;
+    private EncounterType encounterType;
+    private List<Enemy> enemies;  // List to hold enemies
     private int treasure;
 
-    public Room(int enemyCount, int treasure) {
-        this.enemyCount = enemyCount;
+    public Room(EncounterType encounterType, int enemyCount, int treasure) {
+        this.encounterType = encounterType;
+        this.enemies = new ArrayList<>();
         this.treasure = treasure;
+
+        for (int i = 0; i < enemyCount; i++) {
+            this.enemies.add(new Enemy(EnemyType.GOBLIN));  // Add each enemy to the list
+        }
     }
 
     public boolean isCompleted() {
-        return enemyCount == 0 && treasure == 0;
+        return enemies.isEmpty() && treasure == 0;
+    }
+
+    public EncounterType getEncounterType() {
+        return encounterType;
     }
 
     public int getEnemyCount() {
-        return enemyCount;
+        return enemies.size();  // Return the size of the list of enemies
     }
 
     public void defeatEnemy() {
-        if (enemyCount > 0) {
-            enemyCount--;
+        if (!enemies.isEmpty()) {
+            enemies.remove(0);  // Remove an enemy from the list when defeated
         }
+    }
+
+    public List<Enemy> getEnemies() {
+        return enemies;  // Return the list of enemies
     }
 
     public void collectTreasure(Player player) {

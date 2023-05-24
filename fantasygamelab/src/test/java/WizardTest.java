@@ -23,11 +23,19 @@ public class WizardTest {
     }
 
     @Test
-    public void testDefendWithCreature() {
+    public void testDefendWithDragonCreature() {
+        wizard.changeCreature(new Dragon()); // change creature to Dragon
+        wizard.defend(30);
+        assertEquals(50, wizard.getHealthPoints(), "Wizard's health points should decrease by 10 when defending with a Dragon");
+    }
+
+    @Test
+    public void testDefendWithHorseCreature() {
         wizard.changeCreature(horse);
         wizard.defend(30);
-        assertEquals(60, wizard.getHealthPoints(), "Wizard's health points should not decrease when defending with a creature");
+        assertEquals(40, wizard.getHealthPoints(), "Wizard's health points should decrease by 20 when defending with a Horse");
     }
+
 
     @Test
     public void testDefendWithoutCreature() {

@@ -1,8 +1,8 @@
-public class EnemyBow implements Weapon {
+public class EnemyBow implements EnemyWeapon {
     private int damage;
 
     public EnemyBow() {
-        this.damage = 0; // Set the default damage
+        this.damage = 5; // Set the default damage
     }
 
     public EnemyBow(int damage) {
@@ -13,7 +13,9 @@ public class EnemyBow implements Weapon {
         this.damage = damage;
     }
 
+    @Override
     public int use() {
         return damage;
     }
 }
+

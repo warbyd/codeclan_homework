@@ -2,7 +2,7 @@ public class Dragon implements Creature {
     @Override
     public short defend(int damage) {
         System.out.println("Dragon uses its scales to defend!");
-        return 0;
+        return (short) Math.max(damage - 20, 0); // Reduce the damage by 20, but don't go below 0
     }
 
     @Override

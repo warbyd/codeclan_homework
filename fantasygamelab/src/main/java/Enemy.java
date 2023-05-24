@@ -12,6 +12,7 @@ public class Enemy {
         target.defend(damage);
     }
 
+
     public void defend(int damage) {
         int newHealth = healthPoints - damage;
         healthPoints = Math.max(newHealth, 0);
@@ -21,11 +22,7 @@ public class Enemy {
         return healthPoints == 0;
     }
 
-    public EnemyType getType() {
-        return type;
-    }
-
-    public Weapon getWeapon() {
+    public EnemyWeapon getWeapon() {
         return type.getWeapon();
     }
 }

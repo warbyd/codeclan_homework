@@ -1,8 +1,8 @@
-public class EnemyAxe implements Weapon {
+public class EnemyAxe implements EnemyWeapon {
     private int damage;
 
     public EnemyAxe() {
-        this.damage = 0; // Set the default damage
+        this.damage = 25; // Set the default damage
     }
 
     public EnemyAxe(int damage) {
@@ -13,6 +13,7 @@ public class EnemyAxe implements Weapon {
         this.damage = damage;
     }
 
+    @Override
     public int use() {
         return damage;
     }

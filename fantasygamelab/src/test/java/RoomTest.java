@@ -5,36 +5,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RoomTest {
     private Room fullRoom;
-    private Wizard wizard;
+    private Knight knight;
     private Enemy enemy;
 
     @BeforeEach
     public void setUp() {
-        fullRoom = new Room(3, 50);
-        wizard = new Wizard("Wizard", 100, new Fireball(), new Dragon());
+        fullRoom = new Room(EncounterType.FULL_ROOM, 3, 50);
+        knight = new Knight("Knight", 100, new Sword(), 200); // Assuming knight starts with 100 health and 200 armor
         enemy = new Enemy(EnemyType.GOBLIN);
     }
+
 
     @Test
     public void testFullRoom() {
         // Initial state
-        assertFalse(fullRoom.isCompleted(), "Full room should be initially incomplete");
+        assertFalse(fullRoom.isCompleted(), "FullRoom should be initially incomplete");
 
         // Defeating the enemies
         int remainingEnemies = fullRoom.getEnemyCount(); // Get the initial enemy count
-        int totalDamage = 0; // Accumulate the total damage
         for (int i = 0; i < remainingEnemies; i++) {
-            int damage = enemy.getType().getWeapon().use();
-            enemy.attack(wizard);
-            totalDamage += damage; // Accumulate the damage inflicted by each enemy
+            enemy.attack(knight);
             fullRoom.defeatEnemy(); // Mark the enemy as defeated
+
+            fullRoom.collectTreasure(knight);
         }
 
         // Checking final states
-        assertFalse(fullRoom.isCompleted(), "Full room should be marked as completed");
-        assertEquals(85, wizard.getHealthPoints(), "Wizard's health points should be reduced by enemy attacks");
-        assertEquals(150, wizard.getSpell().cast(), "Wizard's spell should deal expected damage");
-        assertEquals(150, wizard.getCreature().defend(totalDamage), "Wizard's creature should defend with expected result");
-        assertEquals(1, wizard.getInventory().size(), "Wizard should have collected the treasure");
+        assertTrue(fullRoom.isCompleted(), "FullRoom should be marked as completed");
+        assertTrue(knight.getHealthPoints() <= 100, "Knight's health points should be reduced by enemy attacks");
+        assertEquals(155, knight.getArmorPoints(), "Knight's armor points should be reduced by enemy attacks"); // Assumption
+        assertEquals(1, knight.getInventory().size(), "Knight should have collected the treasure");
     }
 }

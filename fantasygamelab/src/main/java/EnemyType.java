@@ -4,9 +4,9 @@ public enum EnemyType {
     SKELETON(40, new EnemyBow());
 
     private int healthPoints;
-    private Weapon weapon;
+    private EnemyWeapon weapon;
 
-    EnemyType(int healthPoints, Weapon weapon) {
+    EnemyType(int healthPoints, EnemyWeapon weapon) {
         this.healthPoints = healthPoints;
         this.weapon = weapon;
     }
@@ -15,8 +15,7 @@ public enum EnemyType {
         return healthPoints;
     }
 
-    public Weapon getWeapon() {
+    public EnemyWeapon getWeapon() {
         return weapon;
     }
 }
-

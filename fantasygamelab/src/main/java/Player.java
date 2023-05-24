@@ -9,7 +9,7 @@ public abstract class Player {
     public Player(String name, int healthPoints) {
         this.name = name;
         this.healthPoints = healthPoints;
-        this.inventory = new ArrayList<Integer>();
+        this.inventory = new ArrayList<>();
     }
 
     public int getHealthPoints() {
@@ -30,9 +30,13 @@ public abstract class Player {
 
     public abstract void attack(Player target);
 
-    public abstract void defend(int damage);
+    public void defend(int damage) {
+        int newHealth = healthPoints - damage;
+        healthPoints = Math.max(newHealth, 0);
+    }
 
     public void addToInventory(int item) {
         inventory.add(item);
     }
 }
+
